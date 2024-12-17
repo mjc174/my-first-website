@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: powderblue;}
+h1   {color: blue;}
+p    {color: Black;}
+
+h1,h2, h4 { 
+text-align: center;
+h2 {
+</style>
+</head>
+
+
+
+<h1> RWANDA STANDARDS BOARD </h1>
+<h2> NATIONAL METROLOGY SERVICES DIVISION </h2>
+<h2> PRE-PACKAGES CONTROL REPORT </h2> <br> 
+<h4> REPORT No: 031/2020-2021</h4> <br>
+
+
+<br> <br> 
+
+1. Customer Details: <br>
+-<br>
+-<br>
+-<br>
+
+2. Product details: <br> 
+-<br>
+-<br>
+-<br>
+
+
+3. Standards Used and traceability <br> 
+-<br>
+-<br>
+-<br>
+
+
+4. Standards documents and procedures used <br> 
+-<br>
+-<br>
+-<br>
+
+5. Decision <br> 
+-<br>
+-<br>
+-<br>
+
+6. Test results <br> 
+-<br>
+-<br>
+-<br>
+
+6.1. Labeling requirements <br>
+-<br>
+-<br>
+-<br>
+
+
+6.2. Net quantities requirements
+
+<p> 
+<br> <br> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART PRE-PACKAGES CONTROL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        label, input, button, .result {
+            display: block;
+            margin: 10px 0;
+        }
+        .result {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label for="numbers">Enter indiccated net weights shown on balance:</label>
+        <input type="text" id="numbers" placeholder="e.g., 1, 2, 3, 4, 5">
+        <button onclick="calculate()">Calculate</button>
+
+        <div>
+            <label>Average:</label>
+            <div id="average" class="result"></div>
+        </div>
+
+        <div>
+            <label>Standard Deviation:</label>
+            <div id="stddev" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const input = document.getElementById("numbers").value;
+            const numbers = input.split(",").map(Number).filter(n => !isNaN(n));
+
+            if (numbers.length === 0) {
+                alert("Please enter valid numbers.");
+                return;
+            }
+
+            const average = numbers.reduce((a, b) => a + b, 0) / numbers.length;
+            const variance = numbers.reduce((a, b) => a + Math.pow(b - average, 2), 0) / numbers.length;
+            const stddev = Math.sqrt(variance);
+
+            document.getElementById("average").textContent = average.toFixed(2);
+            document.getElementById("stddev").textContent = stddev.toFixed(2);
+        }
+    </script>
+</body>
+</html>
+
+<br> <br> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Signature Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        canvas {
+            display: block;
+            border: 1px solid #000;
+            margin-top: 10px;
+            width: 100%;
+            height: 150px;
+            touch-action: none; /* Disable default touch actions */
+        }
+
+        .button-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2> Packer's Signature </h2>
+        <form>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="signature">Signature:</label>
+            <canvas id="signature" width="300" height="150"></canvas>
+
+            <div class="button-container">
+                <button type="button" onclick="clearCanvas()">Clear</button>
+                <button type="button" onclick="saveSignature()">Save Signature</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('signature');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+
+        const startDrawing = (event) => {
+            isDrawing = true;
+            ctx.beginPath();
+            ctx.moveTo(getX(event), getY(event));
+            event.preventDefault();
+        };
+
+        const stopDrawing = (event) => {
+            if (isDrawing) {
+                isDrawing = false;
+                ctx.closePath();
+            }
+            event.preventDefault();
+        };
+
+        const draw = (event) => {
+            if (!isDrawing) return;
+            ctx.lineTo(getX(event), getY(event));
+            ctx.stroke();
+            event.preventDefault();
+        };
+
+        const getX = (event) => {
+            if (event.touches) {
+                return event.touches[0].clientX - canvas.getBoundingClientRect().left;
+            } else {
+                return event.clientX - canvas.getBoundingClientRect().left;
+            }
+        };
+
+        const getY = (event) => {
+            if (event.touches) {
+                return event.touches[0].clientY - canvas.getBoundingClientRect().top;
+            } else {
+                return event.clientY - canvas.getBoundingClientRect().top;
+            }
+        };
+
+        const clearCanvas = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        };
+
+        const saveSignature = () => {
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = 'signature.png';
+            link.click();
+        };
+
+        // Event listeners for mouse and touch
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mousemove', draw);
+
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('touchmove', draw);
+    </script>
+</body>
+</html>
+<br> <br> <br>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose an Option</title>
+</head>
+<body>
+    <h2> NAME OF LMU STAFF </h2>
+    <form action="/submit" method="post">
+        <select id="choice" name="choice" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="MANIZABAYO Jean Claude">MANIZABAYO Jean Claude</option>
+            <option value="MUTESA Gael">MUTESA Gael </option>
+            <option value="Rukundo Deo">Rukundo Deo</option>
+            <option value="KABALISA Placide">KABALISA Placide</option>
+    </a></option>
+        </select><br><br>
+    </form>
+</body>
+</html>
+
+<br> <br> <br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-line Input</title>
+</head>
+<body>
+    <h2> RECOMMENDATIONS</h2>
+    <form action="/submit" method="post">
+        <textarea id="message" name="message" rows="5" cols="40" placeholder="Type your message here..."></textarea><br><br>
+        <button type="submit"> Ohereza </button>
+    </form>
+</body>
+</html><br> <br> <br> 
+
+<button onclick="window.print()">Print this page</button> <br> <br>
+
+<a href="https://www.rsb.gov.rw/"> Rwanda Stan
