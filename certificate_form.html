@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Packages Control Certificate</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Pre-Packages Control Certificate Form</h1>
+        <form id="certificateForm">
+            <label>Certificate Number: <input type="text" id="certificateNumber" required></label>
+            <label>Name of Manufacturer: <input type="text" id="manufacturer" required></label>
+            <label>Location: <input type="text" id="location" required></label>
+            <label>Telephone: <input type="text" id="telephone" required></label>
+            <label>Email: <input type="email" id="email" required></label>
+            <label>Product Name: <input type="text" id="productName" required></label>
+            <label>Brand Name: <input type="text" id="brandName" required></label>
+            <label>Declared Quantity: <input type="text" id="quantity" required></label>
+            <label>Lot Size: <input type="number" id="lotSize" required></label>
+            <label>Sample Size: <input type="number" id="sampleSize" required></label>
+            <label>Verification Date: <input type="date" id="verificationDate" required></label>
+            <button type="button" onclick="generateCertificate()">Generate Certificate PDF</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
